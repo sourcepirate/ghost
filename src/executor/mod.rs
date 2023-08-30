@@ -28,8 +28,7 @@ impl From<&RunnerValue> for Runner {
     fn from(value: &RunnerValue) -> Runner {
         match value.command.as_str() {
             "shell" => {
-                let full_path: PathBuf =
-                    canonicalize::<PathBuf>(value.arg.to_owned().into()).unwrap();
+                let full_path: PathBuf = value.arg.to_owned().into();
                 Runner::ShellScript(full_path)
             }
             "docker" => Runner::Docker(value.arg.to_owned()),
@@ -53,9 +52,10 @@ impl Runner {
         match &self {
             &Runner::ShellScript(_e) => {
                 // Shell Script
+                let full_path = canonicalize::<PathBuf>(_e.to_owned()).unwrap();
                 let command = Command::new("bash")
                     .arg("-c")
-                    .arg(_e.to_owned())
+                    .arg(full_path)
                     .output()
                     .expect("Unable to execute the command");
                 let output = command.stdout;
@@ -98,23 +98,23 @@ mod tests {
 
     #[test]
     fn test_runner_value_converstion_docker() {
-        let image = String::from("repo/image");
+        let _image = String::from("repo/image");
         let runner_value = &RunnerValue {
             command: "docker".to_owned(),
-            arg: image,
+            arg: _image,
         };
 
-        assert!(matches!(runner_value.into(), Runner::Docker(image)))
+        assert!(matches!(runner_value.into(), Runner::Docker(_image)))
     }
 
     #[test]
     fn test_runner_value_converstion_shell() {
-        let command = String::from("bash -c ./deploy.sh");
+        let _command = String::from("bash -c ./deploy.sh");
         let runner_value = &RunnerValue {
             command: "shell".to_owned(),
-            arg: command,
+            arg: _command,
         };
 
-        assert!(matches!(runner_value.into(), Runner::ShellScript(command)))
+        assert!(matches!(runner_value.into(), Runner::ShellScript(_command)))
     }
 }
