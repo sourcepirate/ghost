@@ -21,7 +21,7 @@ cargo build --release
 
 echo "Pushing to release folder"
 
-sudo cp target/release/lagoon /release
+sudo cp target/release/ghost /release
 
 echo "Spitting out to github release"
 echo "Crate Name: ${CRATE_NAME}"
