@@ -32,3 +32,5 @@ echo "Tag Info: ${CI_TAG}"
 cd /release
 
 sudo tar -cvf ${CRATE_NAME}-${CI_TAG}.tar.gz *
+
+echo $(ls /release)
