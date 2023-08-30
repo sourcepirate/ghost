@@ -1,0 +1,2 @@
+command: shell
+arg: ./config/help.sh

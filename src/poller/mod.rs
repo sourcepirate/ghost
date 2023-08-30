@@ -13,7 +13,7 @@ pub trait Poller {
 }
 
 pub struct RepoPoller<P: Poller> {
-    commit: CommitID,
+    pub commit: CommitID,
     poller: P,
 }
 

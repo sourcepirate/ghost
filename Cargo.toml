@@ -6,17 +6,19 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-docopt = "1.1.1"
+structopt = "0.3.26"
 gitlab = "0.1603.0"
 serde = "1.0.188"
 serde_derive = "1.0.188"
 serde_json = "1.0.105"
 sled = "0.34.7"
 log = "0.4.20"
+env_logger = "0.10.0"
+serde_yaml = "0.9.25"
 
 
 [profile.release]
-opt-level = "s"
+opt-level = 3
 debug = false
 split-debuginfo = 'unpacked'  # Platform-specific.
 debug-assertions = false

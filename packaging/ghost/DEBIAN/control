@@ -1,0 +1,8 @@
+Package: ghost
+Version: 0.1.0
+Section: custom
+Priority: optional
+Architecture: all
+Essential: no
+Maintainer: sourcepirate
+Description: Deployer for the poor

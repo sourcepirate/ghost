@@ -1,0 +1,13 @@
+[Unit]
+Description=Ghost Service
+After=network.target
+
+[Service]
+PrivateTmp=true
+PIDFile=/var/run/ghost/%i.pid
+ExecStart=/usr/bin/ghost
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
