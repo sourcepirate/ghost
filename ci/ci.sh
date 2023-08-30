@@ -11,13 +11,13 @@ sudo mkdir /release
 
 # For building a static binary.
 export OPENSSL_STATIC=1
+export CRATE_NAME=ghost
+export CI_TAG=$(cargo pkgid | cut -d "#" -f2)
 
 echo "Building binary"
 
 cargo test
 cargo build --release
-
-export CI_TAG=$(cargo pkgid | cut -d "#" -f2)
 
 echo "Pushing to release folder"
 
