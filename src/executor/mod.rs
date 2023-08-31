@@ -48,7 +48,7 @@ impl RunnerValue {
 }
 
 impl Runner {
-    pub fn run(&self) -> () {
+    pub fn run(&self, commit_id: String) -> () {
         match &self {
             &Runner::ShellScript(_e) => {
                 // Shell Script
@@ -56,6 +56,7 @@ impl Runner {
                 let command = Command::new("bash")
                     .arg("-c")
                     .arg(full_path)
+                    .arg(commit_id)
                     .output()
                     .expect("Unable to execute the command");
                 let output = command.stdout;
@@ -69,7 +70,7 @@ impl Runner {
             &Runner::Docker(_e) => {
                 let command = Command::new("docker")
                     .arg("run")
-                    .arg(_e)
+                    .arg(format!("{}:{}", _e, commit_id))
                     .output()
                     .expect("Unable to run the image");
                 let output = command.stdout;

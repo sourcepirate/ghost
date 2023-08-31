@@ -45,8 +45,8 @@ fn main() {
                     if repo.has_changed() {
                         let runner_value: &RunnerValue = runner_wrap.as_ref().unwrap();
                         let runner: Runner = runner_value.into();
-                        log::info!("New commit detected : {}", repo.commit);
-                        runner.run();
+                        log::info!("New commit detected : {}", &repo.commit);
+                        runner.run(repo.commit.clone());
                     }
                     log::info!("Sleeping for 20 seconds");
                     sleep(Duration::new(20, 0))
